@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,9 +17,10 @@ public class Asignatura {
     private Long asignatura_id;
     @Column(length = 100, nullable = false)
     private String nombre;
-    @Column(name = "profesor_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "profesor_id", nullable = false)
     private Profesor profesor_id;
-    
+
     public Asignatura(Long asignatura_id, String nombre, Profesor profesor_id) {
         this.asignatura_id = asignatura_id;
         this.nombre = nombre;

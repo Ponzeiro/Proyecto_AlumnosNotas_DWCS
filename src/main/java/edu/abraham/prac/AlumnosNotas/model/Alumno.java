@@ -1,7 +1,11 @@
 package edu.abraham.prac.AlumnosNotas.model;
 
 import edu.abraham.prac.AlumnosNotas.model.vo.Dni;
+import edu.abraham.prac.AlumnosNotas.model.vo.FechaNacimiento;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,16 +27,24 @@ public class Alumno {
     private String apellido2;
     @Column(nullable = false)
     private int edad;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "day", column = @Column(name = "dia", nullable = false)),
+        @AttributeOverride(name = "month", column = @Column(name = "mes", nullable = false)),
+        @AttributeOverride(name = "year", column = @Column(name = "anho", nullable = false))
+    })
+    private FechaNacimiento fechaNacimiento;
     @jakarta.persistence.Convert(converter = edu.abraham.prac.AlumnosNotas.model.converter.DniAttributeConverter.class)
     @Column(name = "dni")
     private Dni dni;
 
-    public Alumno(Long id, String nombre, String apellido1, String apellido2, int edad, Dni dni) {
+    public Alumno(Long id, String nombre, String apellido1, String apellido2, int edad, FechaNacimiento fechaNacimiento, Dni dni) {
         this.id = id;
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
         this.dni = dni;
     }
     
@@ -73,10 +85,20 @@ public class Alumno {
         this.dni = dni;
     }
 
+    public FechaNacimiento getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(FechaNacimiento fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     @Override
     public String toString() {
         return "Alumno [id=" + id + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2
-                + ", edad=" + edad + ", dni=" + dni + "]";
+                + ", edad=" + edad + ", fechaNacimiento=" + fechaNacimiento + ", dni=" + dni + "]";
     }
+
+    
     
 }
