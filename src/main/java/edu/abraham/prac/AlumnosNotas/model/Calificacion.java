@@ -8,18 +8,27 @@ import jakarta.persistence.Table;
 @Table(name = "calificaciones")
 public class Calificacion {
 
+    private Long calificacion_id;
     private Alumno alumno_id;
-
     private Asignatura asignatura_id;
     private Nota nota;
     
-    public Calificacion(Alumno alumno_id, Asignatura asignatura_id, Nota nota) {
+    public Calificacion(Long calificacion_id, Alumno alumno_id, Asignatura asignatura_id, Nota nota) {
+        this.calificacion_id = calificacion_id;
         this.alumno_id = alumno_id;
         this.asignatura_id = asignatura_id;
         this.nota = nota;
     }
 
     public Calificacion() {
+    }
+
+    public Long getCalificacion_id() {
+        return calificacion_id;
+    }
+
+    public void setCalificacion_id(Long calificacion_id) {
+        this.calificacion_id = calificacion_id;
     }
 
     public Alumno getAlumno_id() {
@@ -48,8 +57,11 @@ public class Calificacion {
 
     @Override
     public String toString() {
-        return "Calificacion [alumno_id=" + alumno_id + ", asignatura_id=" + asignatura_id + ", nota=" + nota + "]";
+        return "Calificacion [calificacion_id=" + calificacion_id + ", alumno_id=" + alumno_id + ", asignatura_id="
+                + asignatura_id + ", nota=" + nota + "]";
     }
+    
 
+    
 
 }

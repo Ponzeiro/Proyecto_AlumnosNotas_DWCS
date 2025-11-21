@@ -18,7 +18,7 @@ public class Alumno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long alumno_id;
     @Column(length = 100, nullable = false)
     private String nombre;
     @Column(length = 100, nullable = false)
@@ -38,8 +38,8 @@ public class Alumno {
     @Column(name = "dni")
     private Dni dni;
 
-    public Alumno(Long id, String nombre, String apellido1, String apellido2, int edad, FechaNacimiento fechaNacimiento, Dni dni) {
-        this.id = id;
+    public Alumno(Long alumno_id, String nombre, String apellido1, String apellido2, int edad, FechaNacimiento fechaNacimiento, Dni dni) {
+        this.alumno_id = alumno_id;
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
@@ -48,11 +48,11 @@ public class Alumno {
         this.dni = dni;
     }
     
-    public Long getId() {
-        return id;
+    public Long getAlumno_id() {
+        return alumno_id;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setAlumno_id(Long alumno_id) {
+        this.alumno_id = alumno_id;
     }
     public String getNombre() {
         return nombre;
@@ -95,7 +95,7 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "Alumno [id=" + id + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2
+        return "Alumno [alumno_id=" + alumno_id + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2
                 + ", edad=" + edad + ", fechaNacimiento=" + fechaNacimiento + ", dni=" + dni + "]";
     }
 
