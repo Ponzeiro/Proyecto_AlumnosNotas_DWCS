@@ -3,10 +3,12 @@ package edu.abraham.prac.AlumnosNotas.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.abraham.prac.AlumnosNotas.model.Profesor;
 import edu.abraham.prac.AlumnosNotas.repository.IProfesorRepo;
 
+@Service
 public class ProfesorService implements IProfesorService {
 
     @Autowired
@@ -14,32 +16,33 @@ public class ProfesorService implements IProfesorService {
      
     @Override
     public List<Profesor> ObtenerProfesores() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ObtenerProfesores'");
+        return profesorRepo.findAll();
     }
 
     @Override
     public Profesor ObtenerProfesorPorId(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ObtenerProfesorPorId'");
+        return profesorRepo.findById(id).orElse(null);
     }
 
     @Override
     public Profesor ModificarProfesorPorId(Profesor profesor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ModificarProfesorPorId'");
+        if(profesorRepo.existsById(profesor.getProfesor_id())) {
+            return profesorRepo.save(profesor);
+        }else {
+            System.err.println("El profesor con ID " + profesor.getProfesor_id() + " no existe o no puede ser modificado.");
+            return null;
+        }
+        
     }
 
     @Override
     public Profesor CrearProfesor(Profesor profesor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'CrearProfesor'");
+        return profesorRepo.save(profesor);
     }
 
     @Override
     public void EliminarProfesorPorId(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'EliminarProfesorPorId'");
+        profesorRepo.deleteById(id);
     }
 
 }

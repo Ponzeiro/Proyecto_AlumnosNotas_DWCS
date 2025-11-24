@@ -1,80 +1,84 @@
 package edu.abraham.prac.AlumnosNotas.model.vo;
 
+import java.util.Objects;
+
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public final class FechaNacimiento {
 
-    private final Integer day;
-    private final Integer month;
-    private final Integer year;
+    private Integer dia;
+    private Integer mes;
+    private Integer anho;
 
-    public FechaNacimiento(Integer day, Integer month, Integer year) {
-
-        if(day == null || month == null || year == null) {
-            throw new IllegalArgumentException("Fecha de nacimiento inválida");
-        } if (day < 0 || day > 31) {
-            throw new IllegalArgumentException("Día inválido");
-        } if (month <= 0 || month > 12) {
-            throw new IllegalArgumentException("Mes inválido");
+    public FechaNacimiento(Integer dia, Integer mes, Integer anho) {
+        if (dia == null || mes == null || anho == null) {
+            throw new IllegalArgumentException("Día, mes y año no pueden ser nulos");
         }
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        if (dia <= 0 || mes <= 0 || anho <= 0) {
+            throw new IllegalArgumentException("Día, mes y año deben ser mayores que 0");
+        }
+        if (mes > 12) {
+            throw new IllegalArgumentException("Mes inválido: " + mes);
+        }
+
+        int maxDias = diasMaximosDelMes(mes, anho);
+        if (dia > maxDias) {
+            throw new IllegalArgumentException("Día inválido para el mes: " + dia + " (máx " + maxDias + ")");
+        }
+
+        this.dia = dia;
+        this.mes = mes;
+        this.anho = anho;
+    }
+
+    // Constructor sin argumentos requerido por JPA y MapStruct
+    public FechaNacimiento() {
+        this.dia = null;
+        this.mes = null;
+        this.anho = null;
+    }
+
+    private int diasMaximosDelMes(int mes, int anho) {
+        return switch (mes) {
+            case 1, 3, 5, 7, 8, 10, 12 -> 31;
+            case 4, 6, 9, 11 -> 30;
+            case 2 -> (esBisiesto(anho) ? 29 : 28);
+            default -> 0;
+        };
+    }
+
+    private boolean esBisiesto(int anho) {
+        return (anho % 4 == 0 && anho % 100 != 0) || (anho % 400 == 0);
+    }
+
+    public Integer getDia() {
+        return dia;
+    }
+
+    public Integer getMes() {
+        return mes;
+    }
+
+    public Integer getAnho() {
+        return anho;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FechaNacimiento that = (FechaNacimiento) o;
+        return Objects.equals(dia, that.dia) && Objects.equals(mes, that.mes) && Objects.equals(anho, that.anho);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((day == null) ? 0 : day.hashCode());
-        result = prime * result + ((month == null) ? 0 : month.hashCode());
-        result = prime * result + ((year == null) ? 0 : year.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        FechaNacimiento other = (FechaNacimiento) obj;
-        if (day == null) {
-            if (other.day != null)
-                return false;
-        } else if (!day.equals(other.day))
-            return false;
-        if (month == null) {
-            if (other.month != null)
-                return false;
-        } else if (!month.equals(other.month))
-            return false;
-        if (year == null) {
-            if (other.year != null)
-                return false;
-        } else if (!year.equals(other.year))
-            return false;
-        return true;
-    }
-
-    public Integer getDay() {
-        return day;
-    }
-
-    public Integer getMonth() {
-        return month;
-    }
-
-    public Integer getYear() {
-        return year;
+        return Objects.hash(anho, mes, dia);
     }
 
     @Override
     public String toString() {
-        return "FechaNacimiento [day=" + day + ", month=" + month + ", year=" + year + "]";
+        return String.format("%04d-%02d-%02d", anho, mes, dia);
     }
-    
 }

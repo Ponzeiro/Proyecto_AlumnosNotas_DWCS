@@ -3,10 +3,12 @@ package edu.abraham.prac.AlumnosNotas.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.abraham.prac.AlumnosNotas.model.Asignatura;
 import edu.abraham.prac.AlumnosNotas.repository.IAsignaturaRepo;
 
+@Service
 public class AsignaturaService implements IAsignaturaService {
 
     @Autowired

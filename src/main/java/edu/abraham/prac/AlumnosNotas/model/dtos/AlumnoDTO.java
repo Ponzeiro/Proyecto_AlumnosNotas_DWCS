@@ -2,16 +2,16 @@ package edu.abraham.prac.AlumnosNotas.model.dtos;
 
 import edu.abraham.prac.AlumnosNotas.model.vo.FechaNacimiento;
 
-public class AlumnoDTO {
+public class AlumnoDTO{
 
     private Long alumno_id;
     private String nombre;
-    private FechaNacimiento fecha_nacimiento;
+    private FechaNacimiento fechaNacimiento;
     
-    public AlumnoDTO(Long alumno_id, String nombre, FechaNacimiento fecha_nacimiento) {
+    public AlumnoDTO(Long alumno_id, String nombre, FechaNacimiento fechaNacimiento) {
         this.alumno_id = alumno_id;
         this.nombre = nombre;
-        this.fecha_nacimiento = fecha_nacimiento;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public Long getAlumno_id() {
@@ -31,16 +31,16 @@ public class AlumnoDTO {
     }
 
     public FechaNacimiento getFecha_nacimiento() {
-        return fecha_nacimiento;
+        return fechaNacimiento;
     }
 
-    public void setFecha_nacimiento(FechaNacimiento fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+    public void setFechaNacimiento(FechaNacimiento fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     @Override
     public String toString() {
-        return "AlumnoDTO [alumno_id=" + alumno_id + ", nombre=" + nombre + ", fecha_nacimiento=" + fecha_nacimiento
+        return "AlumnoDTO [alumno_id=" + alumno_id + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento
                 + "]";
     }    
 }

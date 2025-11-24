@@ -1,16 +1,21 @@
 package edu.abraham.prac.AlumnosNotas.model;
 
+
+import java.util.HashSet;
+import java.util.Set;
+
 import edu.abraham.prac.AlumnosNotas.model.vo.Dni;
 import edu.abraham.prac.AlumnosNotas.model.vo.FechaNacimiento;
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import edu.abraham.prac.AlumnosNotas.model.converter.DniAttributeConverter;
+import edu.abraham.prac.AlumnosNotas.model.converter.FechaNacimientoAttributeConverter;
 
 @Entity
 @Table(name = "alumnos")
@@ -18,25 +23,27 @@ public class Alumno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "alumno_id")
     private Long alumno_id;
-    @Column(length = 100, nullable = false)
+    @Column(name= "nombre", length = 100, nullable = false)
     private String nombre;
-    @Column(length = 100, nullable = false)
+    @Column(name= "apellido1", length = 100, nullable = false)
     private String apellido1;
-    @Column(length = 100, nullable = true)
+    @Column(name= "apellido2", length = 100, nullable = true)
     private String apellido2;
-    @Column(nullable = false)
+    @Column(name= "edad", nullable = false)
     private int edad;
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "day", column = @Column(name = "dia", nullable = false)),
-        @AttributeOverride(name = "month", column = @Column(name = "mes", nullable = false)),
-        @AttributeOverride(name = "year", column = @Column(name = "anho", nullable = false))
-    })
+    @Convert(converter = FechaNacimientoAttributeConverter.class)
+    @Column(name = "fecha_nacimiento")
     private FechaNacimiento fechaNacimiento;
-    @jakarta.persistence.Convert(converter = edu.abraham.prac.AlumnosNotas.model.converter.DniAttributeConverter.class)
+    @Convert(converter = DniAttributeConverter.class)
     @Column(name = "dni")
     private Dni dni;
+    @OneToMany(mappedBy = "alumno_id") 
+    private Set<Calificacion> calificaciones = new HashSet<>();
+
+    public Alumno() {
+    }
 
     public Alumno(Long alumno_id, String nombre, String apellido1, String apellido2, int edad, FechaNacimiento fechaNacimiento, Dni dni) {
         this.alumno_id = alumno_id;
@@ -99,6 +106,4 @@ public class Alumno {
                 + ", edad=" + edad + ", fechaNacimiento=" + fechaNacimiento + ", dni=" + dni + "]";
     }
 
-    
-    
 }
