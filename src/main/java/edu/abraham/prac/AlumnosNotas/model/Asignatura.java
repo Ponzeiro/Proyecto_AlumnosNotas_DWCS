@@ -25,15 +25,18 @@ public class Asignatura {
     private String nombre;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profesor_id", nullable = false)
-    private Profesor profesor_id;
-    @OneToMany(mappedBy = "asignatura_id", cascade = CascadeType.ALL, orphanRemoval = true) 
+    private Profesor profesor;
+    @OneToMany(mappedBy = "asignatura", cascade = CascadeType.ALL, orphanRemoval = true) 
     private Set<Calificacion> calificaciones = new HashSet<>();
 
-    public Asignatura(Long asignatura_id, String nombre, Profesor profesor_id) {
+    public Asignatura(Long asignatura_id, String nombre, Profesor profesor) {
         this.asignatura_id = asignatura_id;
         this.nombre = nombre;
-        this.profesor_id = profesor_id;
+        this.profesor = profesor;
     }
+
+    public Asignatura() {
+    } 
     
     public Long getAsignatura_id() {
         return asignatura_id;
@@ -47,16 +50,16 @@ public class Asignatura {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Profesor getProfesor_id() {
-        return profesor_id;
+    public Profesor getProfesor() {
+        return profesor;
     }
-    public void setProfesor_id(Profesor profesor_id) {
-        this.profesor_id = profesor_id;
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
     }
 
     @Override
     public String toString() {
-        return "Asignatura [asignatura_id=" + asignatura_id + ", nombre=" + nombre + ", profesor_id=" + profesor_id
+        return "Asignatura [asignatura_id=" + asignatura_id + ", nombre=" + nombre + ", profesor=" + profesor
                 + "]";
     }
 

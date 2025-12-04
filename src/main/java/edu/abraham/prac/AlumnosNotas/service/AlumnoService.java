@@ -1,12 +1,11 @@
 package edu.abraham.prac.AlumnosNotas.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.abraham.prac.AlumnosNotas.model.Alumno;
+import edu.abraham.prac.AlumnosNotas.model.dtos.AlumnoDTO;
 import edu.abraham.prac.AlumnosNotas.repository.IAlumnoRepo;
+import edu.abraham.prac.AlumnosNotas.service.interfaces.IAlumnoService;
 
 @Service
 public class AlumnoService implements IAlumnoService {
@@ -15,33 +14,34 @@ public class AlumnoService implements IAlumnoService {
     private IAlumnoRepo alumnoRepo;
 
     @Override
-    public List<Alumno> ObtenerAlumnos() {
-        return alumnoRepo.findAll();
+    public AlumnoDTO obtenerAlumnos(AlumnoDTO alumnoDTO) {
+        alumnoRepo.findAll();
+        return null;
     }
 
     @Override
-    public Alumno ObtenerAlumnosPorId(Long id) {
-        return alumnoRepo.findById(id).orElse(null);
+    public AlumnoDTO obtenerAlumnosPorId(Long id) {
+        alumnoRepo.findById(id);
+        return null;
     }
 
     @Override
-    public Alumno ModificarAlumnoPorId(Alumno alumno) {
-        if(alumnoRepo.existsById(alumno.getAlumno_id())){
-            return alumnoRepo.save(alumno);
-        } else {
-            System.err.println("El alumno con ID " + alumno.getAlumno_id() + " no existe o no puede ser modificado.");
-            return null;
-        }
+    public AlumnoDTO crearAlumno(AlumnoDTO alumnoDTO) {
+        return null;
     }
 
     @Override
-    public Alumno CrearAlumno(Alumno alumno) {
-        return alumnoRepo.save(alumno);
+    public AlumnoDTO actualizarAlumno(Long id, AlumnoDTO alumnoDTO) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actualizarAlumno'");
     }
 
     @Override
-    public void EliminarAlumnoPorId(Long id) {
-        alumnoRepo.deleteById(id);
+    public void eliminarAlumno(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminarAlumno'");
     }
-    
+
+
+
 }

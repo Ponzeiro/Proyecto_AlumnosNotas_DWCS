@@ -23,7 +23,7 @@ public class Profesor {
     @Column(length = 50, nullable = true)
     private String apodo;
     
-    @OneToMany(mappedBy = "profesor_id", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Asignatura> asignaturas;
 
     public Profesor(Long profesor_id, String nombre, String apodo) {
@@ -32,6 +32,9 @@ public class Profesor {
         this.apodo = apodo;
     }
 
+    public Profesor() {
+    }
+    
     public Long getProfesor_id() {
         return profesor_id;
     }
@@ -49,6 +52,14 @@ public class Profesor {
     }
     public void setApodo(String apodo) {
         this.apodo = apodo;
+    }
+
+    public List<Asignatura> getAsignaturas() {
+        return asignaturas;
+    }
+
+    public void setAsignaturas(List<Asignatura> asignaturas) {
+        this.asignaturas = asignaturas;
     }
 
     @Override

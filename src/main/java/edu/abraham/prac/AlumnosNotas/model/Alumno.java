@@ -39,7 +39,7 @@ public class Alumno {
     @Convert(converter = DniAttributeConverter.class)
     @Column(name = "dni")
     private Dni dni;
-    @OneToMany(mappedBy = "alumno_id") 
+    @OneToMany(mappedBy = "alumno") 
     private Set<Calificacion> calificaciones = new HashSet<>();
 
     public Alumno() {

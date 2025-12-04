@@ -20,17 +20,17 @@ public class Calificacion {
     private Long calificacion_id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "alumno_id", nullable = false)
-    private Alumno alumno_id;
+    private Alumno alumno;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "asignatura_id", nullable = false)
-    private Asignatura asignatura_id;
+    private Asignatura asignatura;
     @Column(nullable = true)
     private Nota nota;
     
-    public Calificacion(Long calificacion_id, Alumno alumno_id, Asignatura asignatura_id, Nota nota) {
+    public Calificacion(Long calificacion_id, Alumno alumno, Asignatura asignatura, Nota nota) {
         this.calificacion_id = calificacion_id;
-        this.alumno_id = alumno_id;
-        this.asignatura_id = asignatura_id;
+        this.alumno = alumno;
+        this.asignatura = asignatura;
         this.nota = nota;
     }
 
@@ -45,20 +45,20 @@ public class Calificacion {
         this.calificacion_id = calificacion_id;
     }
 
-    public Alumno getAlumno_id() {
-        return alumno_id;
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public void setAlumno_id(Alumno alumno_id) {
-        this.alumno_id = alumno_id;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
-    public Asignatura getAsignatura_id() {
-        return asignatura_id;
+    public Asignatura getAsignatura() {
+        return asignatura;
     }
 
-    public void setAsignatura_id(Asignatura asignatura_id) {
-        this.asignatura_id = asignatura_id;
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
     }
 
     public Nota getNota() {
@@ -71,11 +71,7 @@ public class Calificacion {
 
     @Override
     public String toString() {
-        return "Calificacion [calificacion_id=" + calificacion_id + ", alumno_id=" + alumno_id + ", asignatura_id="
-                + asignatura_id + ", nota=" + nota + "]";
+        return "Calificacion [calificacion_id=" + calificacion_id + ", alumno=" + alumno + ", asignatura="
+                + asignatura + ", nota=" + nota + "]";
     }
-    
-
-    
-
 }
