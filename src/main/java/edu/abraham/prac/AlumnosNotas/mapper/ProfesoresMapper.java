@@ -15,6 +15,9 @@ public class ProfesoresMapper {
     }
 
     public Profesor toEntity(ProfesorDTO profesorDTO) {
-        return null;
+        if (profesorDTO == null) return null;
+        Profesor profesor = new Profesor();
+        profesor.setNombre(profesorDTO.nombre());
+        return profesor;
     }
 }
