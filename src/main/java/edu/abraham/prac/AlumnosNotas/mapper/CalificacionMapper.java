@@ -1,8 +1,5 @@
 package edu.abraham.prac.AlumnosNotas.mapper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import edu.abraham.prac.AlumnosNotas.model.Asignatura;

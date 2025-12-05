@@ -32,14 +32,12 @@ public class AlumnoService implements IAlumnoService {
 
     @Override
     public AlumnoDTO actualizarAlumno(Long id, AlumnoDTO alumnoDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarAlumno'");
+        return null;
     }
 
     @Override
     public void eliminarAlumno(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminarAlumno'");
+        alumnoRepo.deleteById(id);
     }
 
 
