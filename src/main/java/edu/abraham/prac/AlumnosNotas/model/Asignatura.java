@@ -29,8 +29,7 @@ public class Asignatura {
     @OneToMany(mappedBy = "asignatura", cascade = CascadeType.ALL, orphanRemoval = true) 
     private Set<Calificacion> calificaciones = new HashSet<>();
 
-    public Asignatura(Long asignatura_id, String nombre, Profesor profesor) {
-        this.asignatura_id = asignatura_id;
+    public Asignatura(String nombre, Profesor profesor) {
         this.nombre = nombre;
         this.profesor = profesor;
     }

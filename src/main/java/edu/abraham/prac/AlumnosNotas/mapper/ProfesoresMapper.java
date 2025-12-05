@@ -10,7 +10,8 @@ public class ProfesoresMapper {
 
     public ProfesorDTO toDto(Profesor profesor) {
         return new ProfesorDTO(
-            profesor.getNombre()
+            profesor.getNombre(),
+            profesor.getApodo()
         );
     }
 
@@ -18,6 +19,7 @@ public class ProfesoresMapper {
         if (profesorDTO == null) return null;
         Profesor profesor = new Profesor();
         profesor.setNombre(profesorDTO.nombre());
+        profesor.setApodo(profesorDTO.apodo());
         return profesor;
     }
 }

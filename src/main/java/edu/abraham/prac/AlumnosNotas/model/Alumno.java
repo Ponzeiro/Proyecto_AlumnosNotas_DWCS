@@ -45,8 +45,7 @@ public class Alumno {
     public Alumno() {
     }
 
-    public Alumno(Long alumno_id, String nombre, String apellido1, String apellido2, int edad, FechaNacimiento fechaNacimiento, Dni dni) {
-        this.alumno_id = alumno_id;
+    public Alumno(String nombre, String apellido1, String apellido2, int edad, FechaNacimiento fechaNacimiento, Dni dni) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;

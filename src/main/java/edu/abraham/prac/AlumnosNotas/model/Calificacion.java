@@ -27,8 +27,7 @@ public class Calificacion {
     @Column(nullable = true)
     private Nota nota;
     
-    public Calificacion(Long calificacion_id, Alumno alumno, Asignatura asignatura, Nota nota) {
-        this.calificacion_id = calificacion_id;
+    public Calificacion(Alumno alumno, Asignatura asignatura, Nota nota) {
         this.alumno = alumno;
         this.asignatura = asignatura;
         this.nota = nota;

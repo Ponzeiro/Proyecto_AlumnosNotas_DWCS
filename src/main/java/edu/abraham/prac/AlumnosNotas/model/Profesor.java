@@ -26,8 +26,7 @@ public class Profesor {
     @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Asignatura> asignaturas;
 
-    public Profesor(Long profesor_id, String nombre, String apodo) {
-        this.profesor_id = profesor_id;
+    public Profesor(String nombre, String apodo) {
         this.nombre = nombre;
         this.apodo = apodo;
     }

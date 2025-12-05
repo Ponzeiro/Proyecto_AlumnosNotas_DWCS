@@ -3,6 +3,7 @@ package edu.abraham.prac.AlumnosNotas.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.abraham.prac.AlumnosNotas.model.Profesor;
 import edu.abraham.prac.AlumnosNotas.model.dtos.ProfesorDTO;
 import edu.abraham.prac.AlumnosNotas.repository.IProfesorRepo;
 import edu.abraham.prac.AlumnosNotas.service.interfaces.IProfesorService;
@@ -27,8 +28,20 @@ public class ProfesorService implements IProfesorService{
 
     @Override
     public ProfesorDTO crearProfesor(ProfesorDTO profesorDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'crearProfesor'");
+        try {
+            if (profesorDTO != null) {
+                    profesorRepo.save(new Profesor(
+                        profesorDTO.nombre(),
+                        profesorDTO.apodo()
+                    ));
+                    return profesorDTO;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al crear la calificación: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import edu.abraham.prac.AlumnosNotas.model.dtos.AsignaturaDTO;
 import edu.abraham.prac.AlumnosNotas.repository.IAsignaturaRepo;
 import edu.abraham.prac.AlumnosNotas.service.interfaces.IAsignaturaService;
+import edu.abraham.prac.AlumnosNotas.model.Asignatura;
 
 @Service
 public class AsignaturaService implements IAsignaturaService {
@@ -27,20 +28,24 @@ public class AsignaturaService implements IAsignaturaService {
 
     @Override
     public AsignaturaDTO crearAsignatura(AsignaturaDTO asignaturaDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'crearAsignatura'");
-    }
-
-    @Override
-    public AsignaturaDTO actualizarAsignatura(Long id, AsignaturaDTO asignaturaDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarAsignatura'");
+        try {
+            if (asignaturaDTO != null) {
+                asignaturaRepo.save(new Asignatura(
+                    asignaturaDTO.nombre(),
+                    null
+                ));
+                return asignaturaDTO;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al crear la asignatura: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public void eliminarAsignatura(Long id) {
         asignaturaRepo.deleteById(id);
     }
-    
-
 }

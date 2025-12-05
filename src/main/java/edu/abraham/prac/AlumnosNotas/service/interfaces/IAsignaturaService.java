@@ -7,6 +7,5 @@ public interface IAsignaturaService {
     public AsignaturaDTO obtenerAsignaturas(AsignaturaDTO asignaturaDTO);
     public AsignaturaDTO obtenerAsignaturaPorId(Long id);
     public AsignaturaDTO crearAsignatura(AsignaturaDTO asignaturaDTO);
-    public AsignaturaDTO actualizarAsignatura(Long id, AsignaturaDTO asignaturaDTO);
     public void eliminarAsignatura(Long id);
 }

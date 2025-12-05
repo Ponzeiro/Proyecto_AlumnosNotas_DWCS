@@ -3,15 +3,28 @@ package edu.abraham.prac.AlumnosNotas.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.abraham.prac.AlumnosNotas.model.Alumno;
+import edu.abraham.prac.AlumnosNotas.model.Asignatura;
+import edu.abraham.prac.AlumnosNotas.model.Calificacion;
 import edu.abraham.prac.AlumnosNotas.model.dtos.CalificacionDTO;
+import edu.abraham.prac.AlumnosNotas.model.enums.Nota;
+import edu.abraham.prac.AlumnosNotas.repository.IAlumnoRepo;
+import edu.abraham.prac.AlumnosNotas.repository.IAsignaturaRepo;
 import edu.abraham.prac.AlumnosNotas.repository.ICalificacionRepo;
 import edu.abraham.prac.AlumnosNotas.service.interfaces.ICalificacionService;
+
 
 @Service
 public class CalificacionService implements ICalificacionService {
 
     @Autowired
     private ICalificacionRepo calificacionRepo;
+
+    @Autowired
+    private IAlumnoRepo alumnoRepo;
+
+    @Autowired
+    private IAsignaturaRepo asignaturaRepo;
 
     @Override
     public CalificacionDTO obtenerCalificaciones(CalificacionDTO calificacionDTO) {
@@ -27,8 +40,29 @@ public class CalificacionService implements ICalificacionService {
 
     @Override
     public CalificacionDTO crearCalificacion(CalificacionDTO calificacionDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'crearCalificacion'");
+        
+    try {
+        if (calificacionDTO != null) {
+
+            Alumno alumno = alumnoRepo.findById(calificacionDTO.alumnoId())
+            .orElseThrow(() -> new Exception("Alumno no encontrado"));
+
+            Asignatura asignatura = asignaturaRepo.findById(calificacionDTO.asignaturaId())
+            .orElseThrow(() -> new Exception("Asignatura no encontrada"));
+
+            calificacionRepo.save(new Calificacion(
+                alumno,
+                asignatura,
+                calificacionDTO.nota() != null ? Nota.fromValor(calificacionDTO.nota()) : null
+            ));
+            return calificacionDTO;
+        } else {
+            return null;
+        }
+    } catch (Exception e) {
+        System.out.println("Error al crear la calificación: " + e.getMessage());
+        return null;
+        }
     }
 
     @Override

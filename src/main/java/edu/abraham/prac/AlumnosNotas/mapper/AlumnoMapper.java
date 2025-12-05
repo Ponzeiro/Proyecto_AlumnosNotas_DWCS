@@ -29,6 +29,7 @@ public class AlumnoMapper {
         return new AlumnoDTO(
             alumno.getNombre(),
             alumno.getApellido1(),
+            alumno.getApellido2(),
             alumno.getEdad(),
             dia,
             mes,
