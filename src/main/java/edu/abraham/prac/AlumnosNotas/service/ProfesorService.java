@@ -46,8 +46,18 @@ public class ProfesorService implements IProfesorService{
 
     @Override
     public ProfesorDTO actualizarProfesor(Long id, ProfesorDTO profesorDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarProfesor'");
+        Profesor profesor = profesorRepo.findById(id).orElse(null);
+        try {
+            if (profesor != null && profesorDTO != null) {
+                profesor.setNombre(profesorDTO.nombre());
+                profesor.setApodo(profesorDTO.apodo());
+                profesorRepo.save(profesor);
+            }
+            return profesorDTO;
+        } catch (Exception e) {
+            System.out.println("Error al actualizar el profesor: " + e.getMessage());
+            return null;
+        }   
     }
 
     @Override

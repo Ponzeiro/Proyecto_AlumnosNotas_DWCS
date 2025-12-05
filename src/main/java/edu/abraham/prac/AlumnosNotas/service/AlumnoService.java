@@ -59,14 +59,33 @@ public class AlumnoService implements IAlumnoService {
 
     @Override
     public AlumnoDTO actualizarAlumno(Long id, AlumnoDTO alumnoDTO) {
-        return null;
+        try {
+            Alumno alumno = alumnoRepo.findById(id).orElse(null);
+            if (alumno != null && alumnoDTO != null) {
+                alumno.setNombre(alumnoDTO.nombre());
+                alumno.setApellido1(alumnoDTO.apellido1());
+                alumno.setApellido2(alumnoDTO.apellido2());
+                alumno.setEdad(alumnoDTO.edad());
+                alumno.setFechaNacimiento(new FechaNacimiento(
+                    alumnoDTO.fecha_nacimiento_dia(),
+                    alumnoDTO.fecha_nacimiento_mes(),
+                    alumnoDTO.fecha_nacimiento_anho()));
+                alumno.setDni(new Dni(
+                    alumnoDTO.dni_numero(),
+                    alumnoDTO.dni_letra()
+                ));
+                alumnoRepo.save(alumno);   
+            }
+            return alumnoDTO;
+        } catch (Exception e) {
+            System.out.println("Error al actualizar el alumno: " + e.getMessage());
+            return null;
+        }
+        
     }
 
     @Override
     public void eliminarAlumno(Long id) {
         alumnoRepo.deleteById(id);
     }
-
-
-
 }

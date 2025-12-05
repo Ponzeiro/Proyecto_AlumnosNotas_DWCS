@@ -67,8 +67,17 @@ public class CalificacionService implements ICalificacionService {
 
     @Override
     public CalificacionDTO actualizarCalificacion(Long id, CalificacionDTO calificacionDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarCalificacion'");
+        Calificacion calificacion = calificacionRepo.findById(id).orElse(null);
+        try {
+            if (calificacion != null && calificacionDTO != null) {
+                calificacion.setNota(Nota.fromValor(calificacionDTO.nota()));
+                calificacionRepo.save(calificacion);
+            }
+            return calificacionDTO;
+        } catch (Exception e) {
+            System.out.println("Error al actualizar la calificación: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
